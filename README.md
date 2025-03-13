@@ -2,9 +2,6 @@
 
 Red Triangle is a web application built using React for buying and renting properties.
 
-### Logo
-![Logo](src/Component/assets/img/imageloooogo.png)
-
 ### Wireframe
 ![Wireframe](src/Component/assets/img/warframe.PNG)
 
