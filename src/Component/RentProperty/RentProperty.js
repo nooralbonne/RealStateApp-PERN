@@ -7,6 +7,9 @@ import './RentProperty.css';
 // Swiper imports
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+const serverUrl = process.env.REACT_APP_SERVER_URL;
+
+
 const chunkArray = (array, size) => {
   const result = [];
   for (let i = 0; i < array.length; i += size) {
@@ -97,7 +100,7 @@ function RentProperty() {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/properties/list', {
+        const response = await axios.get(`${serverUrl}/properties/list`, {
           params: {
             locationExternalIDs: '5002',
             purpose: 'for-rent',

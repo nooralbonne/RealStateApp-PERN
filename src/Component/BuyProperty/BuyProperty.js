@@ -2,9 +2,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import BProperty from './BProp/BProp.js';
 import '../RentProperty/RentProperty.css'
- 
+
 // Swiper imports
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 const chunkArray = (array, size) => {
   const result = [];
@@ -13,11 +15,11 @@ const chunkArray = (array, size) => {
   }
   return result;
 };
- 
+
 const PopularSection = ({ properties }) => {
   const groupedProperties = chunkArray(properties, 3);
- 
-    const swiperRef = useRef(null); // Create a ref to hold the swiper instance
+
+  const swiperRef = useRef(null); // Create a ref to hold the swiper instance
   // Function to handle the next slide
   const goToNext = () => {
     if (swiperRef.current) {
@@ -31,14 +33,15 @@ const PopularSection = ({ properties }) => {
       swiperRef.current.swiper.slidePrev();
     }
   };
+
   return (
     <section className="popular section" id="Rentpopular">
       <div className="container">
         <span className="section__subtitle">Best Choice</span>
         <h2 className="section__title">Properties for Rent<span>.</span></h2>
 
-           {/* Swiper container with a ref to access swiper instance */}
-           <Swiper
+        {/* Swiper container with a ref to access swiper instance */}
+        <Swiper
           ref={swiperRef} // Pass the ref here to access the swiper instance
           spaceBetween={32} // Space between slides
           grabCursor={true} // Enable grab cursor (useful for dragging)
@@ -86,15 +89,15 @@ const PopularSection = ({ properties }) => {
     </section>
   );
 };
- 
+
 function BuyProperty() {
   const [properties, setProperties] = useState([]);
   const [error, setError] = useState(null);
- 
+
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/properties/list', {
+        const response = await axios.get(`${serverUrl}/properties/list`, {
           params: {
             locationExternalIDs: '5002',
             purpose: 'for-sale',
@@ -109,12 +112,12 @@ function BuyProperty() {
     };
     fetchProperties();
   }, []);
- 
+
   if (error) {
     return <div>{error}</div>;
   }
- 
+
   return <PopularSection properties={properties} />;
 }
- 
+
 export default BuyProperty;
