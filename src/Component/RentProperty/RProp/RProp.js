@@ -17,7 +17,7 @@ function RProperty({ property }) {
         </div>
  
         <Link to={`/property/${property.externalID}`}>
-          <img src={property.coverPhoto.url} alt={property.title} className="popular__img" />
+          <img src={property.coverPhoto.url} alt={property.title} className="Bp__img" />
         </Link>
  
         <div className="popular__data">
